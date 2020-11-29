@@ -8,9 +8,11 @@ Student id #92498
 import numpy as np
 from math import log
 
+[[0,0], [0,1], [1,0], [1,1]], [0,0,0,1]
 
 def createdecisiontree(D, Y, noise = False):
 	examples = []
+	attributes = []
 	num_attributes = len(D[0])
 
 	for i in range(0, len(D)):
@@ -18,10 +20,7 @@ def createdecisiontree(D, Y, noise = False):
 		for j in range(0, num_attributes):
 			d.append(D[i][j])
 
-		examples.append(d)
-		examples.append(Y[i])
-
-	attributes = []
+		examples.append([d,Y[i]])
 
 	for j in range(0, num_attributes):
 		a = []
@@ -30,18 +29,26 @@ def createdecisiontree(D, Y, noise = False):
 		
 		attributes.append(a)
 	
-	decisiontreelearning(examples, attributes, examples)
+	print(examples)
+	print(attributes)
+	return decisiontreelearning(examples, attributes, examples)
 
 
 def decisiontreelearning(examples, attributes, parent_examples):
-	if examples is []:
+	print("entra")
+	if examples == []:
+		print(1)
 		return plurality_value(parent_examples)
 	elif same_classification(examples):
+		print(2)
 		return examples[0][1]
-	elif attributes is []:
+	elif attributes == []:
+		print(3)
 		return plurality_value(examples)
 	else:
+		print(3)
 		importances = importance(attributes, examples)
+		print(f'imps={importances}')
 		max_importance = max(importances)
 		for i in range(0, len(importances)):
 			if importances[i] == max_importance:
@@ -56,10 +63,14 @@ def decisiontreelearning(examples, attributes, parent_examples):
 				if e[0][i] == vk:
 					exs.append(e)
 			
-			attributes.pop(i)	# attributes - A
-			subtree = decisiontreelearning(exs, attributes, examples)
+			print(attributes)
+			attr = attributes.copy() # lista a passar
+			attr.pop(i)	# attributes - A
+			print(f'vai chamar fun com at={attr} e ex= {exs}')
+			subtree = decisiontreelearning(exs, attr, examples)
 			tree.append(subtree)
 
+		print(tree)
 		return tree
 
 exs = [[(0,0),0], [(0,1),0], [(1,0),0], [(1,1),1]]
@@ -133,6 +144,8 @@ def remainder(attributes, examples, pn):
 	for u in uniques:
 		nk = 0
 		pk = 0
+		print(f'len at{len(attributes)} e len ex {len(examples)}')
+		print(attributes)
 		for i in range(0, len(attributes)):
 			if attributes[i] == u:
 				if examples[i][1] == 0:
