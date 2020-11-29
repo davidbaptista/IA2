@@ -157,8 +157,6 @@ def classify(T, data):
 	pass
 
 
-print(f'tree={createdecisiontree([ [0,0], [0,1], [1,0], [1,1]], [0,0,0,1])}')
-
 '''print(remainder([True, False, True, True, False, False, True, False], 
 	([(True, True), 0], 
 	[(False, False), 1],
