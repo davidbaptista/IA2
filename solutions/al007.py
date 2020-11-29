@@ -29,26 +29,20 @@ def createdecisiontree(D, Y, noise = False):
 		
 		attributes.append(a)
 	
-	print(examples)
-	print(attributes)
+#	print(examples)
+#	print(attributes)
 	return decisiontreelearning(examples, attributes, examples)
 
 
 def decisiontreelearning(examples, attributes, parent_examples):
-	print("entra")
 	if examples == []:
-		print(1)
 		return plurality_value(parent_examples)
 	elif same_classification(examples):
-		print(2)
 		return examples[0][1]
 	elif attributes == []:
-		print(3)
 		return plurality_value(examples)
 	else:
-		print(3)
 		importances = importance(attributes, examples)
-		print(f'imps={importances}')
 		max_importance = max(importances)
 		for i in range(0, len(importances)):
 			if importances[i] == max_importance:
@@ -59,21 +53,22 @@ def decisiontreelearning(examples, attributes, parent_examples):
 		unique_attribute_values = np.unique(np.array(attributes[i]))
 		for vk in unique_attribute_values:
 			exs = []
+			attrs = []
+
+			for j in range(0, len(examples[0][0])):
+				attrs.append([])
+
 			for e in examples:
 				if e[0][i] == vk:
 					exs.append(e)
-			
-			print(attributes)
-			attr = attributes.copy() # lista a passar
-			attr.pop(i)	# attributes - A
-			print(f'vai chamar fun com at={attr} e ex= {exs}')
-			subtree = decisiontreelearning(exs, attr, examples)
+
+					for j in range(0, len(e[0])):
+						attrs[j].append(e[0][j])
+
+			subtree = decisiontreelearning(exs, attrs, examples)
 			tree.append(subtree)
 
-		print(tree)
 		return tree
-
-exs = [[(0,0),0], [(0,1),0], [(1,0),0], [(1,1),1]]
 
 def same_classification(examples):
 	value = examples[0][1]
@@ -144,8 +139,8 @@ def remainder(attributes, examples, pn):
 	for u in uniques:
 		nk = 0
 		pk = 0
-		print(f'len at{len(attributes)} e len ex {len(examples)}')
-		print(attributes)
+	#	print(f'len atributos: {len(attributes)} e len exemplos: {len(examples)}')
+	#	print(attributes)
 		for i in range(0, len(attributes)):
 			if attributes[i] == u:
 				if examples[i][1] == 0:
@@ -162,8 +157,7 @@ def classify(T, data):
 	pass
 
 
-
-print(createdecisiontree([ [0,0], [0,1], [1,0], [1,1]], [0,0,0,1]))
+print(f'tree={createdecisiontree([ [0,0], [0,1], [1,0], [1,1]], [0,0,0,1])}')
 
 '''print(remainder([True, False, True, True, False, False, True, False], 
 	([(True, True), 0], 
