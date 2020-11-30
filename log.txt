@@ -1,84 +1,117 @@
 Teste 0
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 0 0 0]
+
 Teste 1
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 0 0 1]
+
 Teste 2
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 0 1 1]
+
 Teste 3
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 0 1 1]
+
 Teste 4
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 1 1 1]
+
 Teste 5
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 1 1 1]
+
 Teste 6
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 1 1 1]
+
 Teste 7
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 1 1 1]
+
 Teste 8
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 9
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 10
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 11
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 12
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 13
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 14
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 15
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 16
+
 D = [[0 0 0]
  [0 0 1]
  [0 1 0]
@@ -87,7 +120,9 @@ D = [[0 0 0]
  [1 0 1]
  [1 1 0]
  [1 1 1]]Y = [0 1 0 1 0 1 0 1]
+
 Teste 17
+
 D = [[0 0 0]
  [0 0 1]
  [0 1 0]
@@ -96,7 +131,9 @@ D = [[0 0 0]
  [1 0 1]
  [1 1 0]
  [1 1 1]]Y = [0 1 0 1 1 1 1 1]
+
 Teste 18
+
 D = [[0 0 0]
  [0 0 1]
  [0 1 0]
@@ -105,7 +142,9 @@ D = [[0 0 0]
  [1 0 1]
  [1 1 0]
  [1 1 1]]Y = [1 0 0 0 0 0 0 1]
+
 Teste 19
+
 D = [[0 0 0]
  [0 0 1]
  [0 1 0]
@@ -114,7 +153,9 @@ D = [[0 0 0]
  [1 0 1]
  [1 1 0]
  [1 1 1]]Y = [0 0 1 1 1 1 0 0]
+
 Teste 20
+
 D = [[0 0 0]
  [0 0 1]
  [0 1 0]
@@ -123,14 +164,18 @@ D = [[0 0 0]
  [1 0 1]
  [1 1 0]
  [1 1 1]]Y = [0 1 1 0 0 1 1 0]
+
 Teste 21
+
 D = [[ True  True  True ...  True False  True]
  [False False  True ... False False False]
  [ True False False ...  True  True False]
  ...
  [False False False ... False  True  True]
  [ True  True  True ... False False False]
- [False  True False ... False False False]]Y = [False  True  True False  True  True  True False  True  True  True False
+ [False  True False ... False False False]]
+
+Y = [False  True  True False  True  True  True False  True  True  True False
  False  True  True  True False False  True False  True  True  True False
  False False False  True  True False False False  True False False False
  False  True  True False False  True  True  True False  True False False
@@ -214,7 +259,9 @@ D = [[ True  True  True ...  True False  True]
  False False False  True False  True  True  True False False  True  True
   True  True  True False False False  True  True False  True  True False
   True  True False  True]
+
 Teste 22
+
 D = [[ True  True  True ...  True False False]
  [ True  True  True ... False False False]
  [False False False ... False False False]
@@ -222,7 +269,9 @@ D = [[ True  True  True ...  True False False]
  [ True  True False ...  True  True False]
  [ True  True  True ...  True False  True]
  [False False False ... False  True  True]]Y = [False  True  True ...  True  True  True]
+
 Teste 23
+
 D = [[ True  True  True ...  True False  True]
  [False False  True ... False False False]
  [ True False False ...  True  True False]
@@ -230,7 +279,9 @@ D = [[ True  True  True ...  True False  True]
  [ True False False ...  True  True False]
  [False False False ...  True  True False]
  [ True  True  True ...  True  True  True]]Y = [False  True  True ...  True False  True]
+
 Teste 24
+
 D = [[ True  True  True ...  True False False]
  [ True  True  True ... False False False]
  [False False False ... False False False]
@@ -238,7 +289,9 @@ D = [[ True  True  True ...  True False False]
  [False  True  True ...  True  True False]
  [False False False ... False  True False]
  [ True False  True ...  True False  True]]Y = [False  True False ... False False  True]
+
 Teste 25
+
 D = [[ True  True  True ...  True False False]
  [ True  True  True ... False False False]
  [False False False ... False False False]
@@ -246,7 +299,9 @@ D = [[ True  True  True ...  True False False]
  [False  True  True ...  True  True False]
  [False False False ... False  True False]
  [ True False  True ...  True False  True]]Y = [False  True False ...  True False False]
+
 Teste 26
+
 D = [[ True  True  True ... False  True False]
  [False  True  True ... False  True False]
  [False False False ... False  True False]
@@ -254,87 +309,121 @@ D = [[ True  True  True ... False  True False]
  [False  True  True ... False  True  True]
  [ True False False ...  True False False]
  [ True False  True ... False  True False]]Y = [False  True False ...  True False  True]
+
 Teste 0
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 0 0 0]
+
 Teste 1
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 0 0 1]
+
 Teste 2
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 0 1 1]
+
 Teste 3
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 0 1 1]
+
 Teste 4
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 1 1 1]
+
 Teste 5
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 1 1 1]
+
 Teste 6
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 1 1 1]
+
 Teste 7
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [0 1 1 1]
+
 Teste 8
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 9
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 10
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 11
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 12
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 13
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 14
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 15
+
 D = [[0 0]
  [0 1]
  [1 0]
  [1 1]]Y = [1 1 1 1]
+
 Teste 16
+
 D = [[0 0 0]
  [0 0 1]
  [0 1 0]
@@ -343,7 +432,9 @@ D = [[0 0 0]
  [1 0 1]
  [1 1 0]
  [1 1 1]]Y = [0 1 0 1 0 1 0 1]
+
 Teste 17
+
 D = [[0 0 0]
  [0 0 1]
  [0 1 0]
@@ -352,7 +443,9 @@ D = [[0 0 0]
  [1 0 1]
  [1 1 0]
  [1 1 1]]Y = [0 1 0 1 1 1 1 1]
+
 Teste 18
+
 D = [[0 0 0]
  [0 0 1]
  [0 1 0]
@@ -361,7 +454,9 @@ D = [[0 0 0]
  [1 0 1]
  [1 1 0]
  [1 1 1]]Y = [1 0 0 0 0 0 0 1]
+
 Teste 19
+
 D = [[0 0 0]
  [0 0 1]
  [0 1 0]
@@ -370,7 +465,9 @@ D = [[0 0 0]
  [1 0 1]
  [1 1 0]
  [1 1 1]]Y = [0 0 1 1 1 1 0 0]
+
 Teste 20
+
 D = [[0 0 0]
  [0 0 1]
  [0 1 0]
@@ -379,7 +476,9 @@ D = [[0 0 0]
  [1 0 1]
  [1 1 0]
  [1 1 1]]Y = [0 1 1 0 0 1 1 0]
+
 Teste 21
+
 D = [[ True  True  True ...  True False  True]
  [False False  True ... False False False]
  [ True False False ...  True  True False]
@@ -470,7 +569,9 @@ D = [[ True  True  True ...  True False  True]
  False False False  True False  True  True  True False False  True  True
   True  True  True False False False  True  True False  True  True False
   True  True False  True]
+
 Teste 22
+
 D = [[ True  True  True ...  True False False]
  [ True  True  True ... False False False]
  [False False False ... False False False]
@@ -478,7 +579,9 @@ D = [[ True  True  True ...  True False False]
  [ True  True False ...  True  True False]
  [ True  True  True ...  True False  True]
  [False False False ... False  True  True]]Y = [False  True  True ...  True  True  True]
+
 Teste 23
+
 D = [[ True  True  True ...  True False  True]
  [False False  True ... False False False]
  [ True False False ...  True  True False]
@@ -486,7 +589,9 @@ D = [[ True  True  True ...  True False  True]
  [ True False False ...  True  True False]
  [False False False ...  True  True False]
  [ True  True  True ...  True  True  True]]Y = [False  True  True ...  True False  True]
+
 Teste 24
+
 D = [[ True  True  True ...  True False False]
  [ True  True  True ... False False False]
  [False False False ... False False False]
@@ -494,7 +599,9 @@ D = [[ True  True  True ...  True False False]
  [False  True  True ...  True  True False]
  [False False False ... False  True False]
  [ True False  True ...  True False  True]]Y = [False  True False ... False False  True]
+
 Teste 25
+
 D = [[ True  True  True ...  True False False]
  [ True  True  True ... False False False]
  [False False False ... False False False]
@@ -502,7 +609,9 @@ D = [[ True  True  True ...  True False False]
  [False  True  True ...  True  True False]
  [False False False ... False  True False]
  [ True False  True ...  True False  True]]Y = [False  True False ...  True False False]
+
 Teste 26
+
 D = [[ True  True  True ... False  True False]
  [False  True  True ... False  True False]
  [False False False ... False  True False]
@@ -510,3 +619,384 @@ D = [[ True  True  True ... False  True False]
  [False  True  True ... False  True  True]
  [ True False False ...  True False False]
  [ True False  True ... False  True False]]Y = [False  True False ...  True False  True]
+
+Teste 0
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [0 0 0 1]
+
+Teste 0
+
+D = [[False False]
+ [False  True]
+ [ True False]
+ [ True  True]]Y = [False False False  True]
+
+Teste 0
+
+D = [[False False]
+ [False  True]
+ [ True False]
+ [ True  True]]Y = [False False False  True]
+
+Teste 0
+
+D = [[False False]
+ [False  True]
+ [ True False]
+ [ True  True]]Y = [False False False  True]
+
+Teste 0
+
+D = [[False False]
+ [False  True]
+ [ True False]
+ [ True  True]]Y = [False False False  True]
+
+Teste 0
+
+D = [[False False]
+ [False  True]
+ [ True False]
+ [ True  True]]Y = [False False False  True]
+
+Teste 0
+
+D = [[False False]
+ [False  True]
+ [ True False]
+ [ True  True]]Y = [False False False  True]
+
+Teste 0
+
+D = [[False False]
+ [False  True]
+ [ True False]
+ [ True  True]]Y = [False False False  True]
+
+Teste 0
+
+D = [[False False]
+ [False  True]
+ [ True False]
+ [ True  True]]Y = [False False False  True]
+
+Teste 0
+
+D = [[False False]
+ [False  True]
+ [ True False]
+ [ True  True]]Y = [False False False  True]
+
+Teste 1
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [0 0 0 0]
+
+Teste 2
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [0 0 0 1]
+
+Teste 3
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [0 0 1 1]
+
+Teste 4
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [0 0 1 1]
+
+Teste 5
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [0 1 1 1]
+
+Teste 6
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [0 1 1 1]
+
+Teste 7
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [0 1 1 1]
+
+Teste 8
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [0 1 1 1]
+
+Teste 9
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [1 1 1 1]
+
+Teste 10
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [1 1 1 1]
+
+Teste 11
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [1 1 1 1]
+
+Teste 12
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [1 1 1 1]
+
+Teste 13
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [1 1 1 1]
+
+Teste 14
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [1 1 1 1]
+
+Teste 15
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [1 1 1 1]
+
+Teste 16
+
+D = [[0 0]
+ [0 1]
+ [1 0]
+ [1 1]]Y = [1 1 1 1]
+
+Teste 17
+
+D = [[0 0 0]
+ [0 0 1]
+ [0 1 0]
+ [0 1 1]
+ [1 0 0]
+ [1 0 1]
+ [1 1 0]
+ [1 1 1]]Y = [0 1 0 1 0 1 0 1]
+
+Teste 18
+
+D = [[0 0 0]
+ [0 0 1]
+ [0 1 0]
+ [0 1 1]
+ [1 0 0]
+ [1 0 1]
+ [1 1 0]
+ [1 1 1]]Y = [0 1 0 1 1 1 1 1]
+
+Teste 19
+
+D = [[0 0 0]
+ [0 0 1]
+ [0 1 0]
+ [0 1 1]
+ [1 0 0]
+ [1 0 1]
+ [1 1 0]
+ [1 1 1]]Y = [1 0 0 0 0 0 0 1]
+
+Teste 20
+
+D = [[0 0 0]
+ [0 0 1]
+ [0 1 0]
+ [0 1 1]
+ [1 0 0]
+ [1 0 1]
+ [1 1 0]
+ [1 1 1]]Y = [0 0 1 1 1 1 0 0]
+
+Teste 21
+
+D = [[0 0 0]
+ [0 0 1]
+ [0 1 0]
+ [0 1 1]
+ [1 0 0]
+ [1 0 1]
+ [1 1 0]
+ [1 1 1]]Y = [0 1 1 0 0 1 1 0]
+
+Teste 22
+
+D = [[ True  True  True ...  True False  True]
+ [False False  True ... False False False]
+ [ True False False ...  True  True False]
+ ...
+ [False False False ... False  True  True]
+ [ True  True  True ... False False False]
+ [False  True False ... False False False]]Y = [False  True  True False  True  True  True False  True  True  True False
+ False  True  True  True False False  True False  True  True  True False
+ False False False  True  True False False False  True False False False
+ False  True  True False False  True  True  True False  True False False
+ False  True False  True False  True False False False  True  True False
+  True  True False False False  True  True  True  True False  True  True
+ False False False  True  True  True False  True False  True  True  True
+ False False False False False False False False  True False False False
+ False  True  True False False False False False  True False  True  True
+ False  True  True False  True  True False  True  True  True False  True
+  True False  True  True  True  True  True  True False False False False
+  True False False False False False False False  True False  True  True
+ False  True  True  True False False  True  True False False  True False
+ False  True False False False False False  True  True False False False
+  True False False False False  True  True  True False False False False
+  True False False False  True False  True False  True False  True False
+ False  True False False False False  True False False False False False
+ False  True False False False False False False  True  True  True False
+ False  True False False False  True False  True  True  True False False
+ False  True False False  True  True  True  True  True False  True False
+ False  True  True False  True False  True  True  True False  True False
+  True  True False False  True False False False  True False  True  True
+ False False  True False  True  True False False False  True  True False
+ False  True False  True  True False  True  True  True  True False  True
+ False  True False False False  True  True False False False False False
+ False  True False False False False False  True False False False False
+  True False  True False False  True False  True  True  True False  True
+  True  True  True  True False False False  True False  True False False
+ False False False False False False False  True  True False False  True
+ False  True False  True False  True False False  True False False  True
+  True  True False False False  True  True False False False  True  True
+ False False  True False  True  True False False  True False  True False
+ False  True False  True False  True  True False False False False False
+  True  True False False False  True  True False False False False  True
+  True False  True False  True False  True  True False False  True False
+  True  True  True  True False False  True  True  True False False False
+ False  True False False False  True  True False False False False False
+ False  True False False False False False False  True False False  True
+ False False False False False  True  True False  True False False False
+ False False False  True False  True  True False False False False False
+ False False  True False False False False False False False False False
+  True  True False  True  True  True False  True False False False  True
+  True False  True False False  True False  True False  True False  True
+  True  True  True  True False  True False  True  True  True False  True
+ False  True False False False  True False  True  True False False  True
+  True False  True  True  True  True False  True  True False False  True
+  True False False False False False False  True  True False False False
+ False False  True  True  True  True  True  True  True  True False False
+  True False False  True False False  True False False False False False
+  True  True  True False  True  True  True False False False False  True
+ False False False False False False False False False  True False  True
+ False False  True  True  True  True False False False  True  True False
+ False False False  True  True False  True False  True False  True False
+ False False False  True False False  True False False  True False  True
+ False  True False  True False  True False  True  True False False False
+ False  True False  True False False  True False False  True False False
+ False False False  True False  True False  True False False  True False
+ False  True  True False  True  True False  True False  True False False
+  True  True False  True False  True False False False False  True False
+ False  True  True  True False False  True  True  True False  True False
+  True False  True  True  True False False False False False  True False
+ False  True False  True  True  True False  True  True  True  True  True
+ False  True  True False  True  True False  True  True  True False  True
+ False  True False False False  True  True  True False False  True  True
+  True False  True False  True False False False False  True False False
+ False False  True False False False False False False False False  True
+ False  True  True  True False False  True False  True False False False
+ False False  True False False False  True False False  True  True False
+ False False  True  True False False False False False  True False False
+ False False  True False False False False  True False False False  True
+  True False False False  True  True False False False  True False False
+  True False False  True  True False False  True  True  True  True  True
+ False  True False False  True False False False  True False  True  True
+ False  True False False  True  True False False False  True  True False
+ False False False False False False False  True  True False False  True
+ False  True  True False False  True  True False  True  True False  True
+ False False False  True False False  True  True False False False  True
+  True  True False  True False False False False  True False  True False
+ False False  True False  True False False  True False False  True False
+  True  True False False False False False False  True  True False  True
+  True  True False  True  True  True False False False  True False  True
+ False False False  True False  True  True  True False False  True  True
+  True  True  True False False False  True  True False  True  True False
+  True  True False  True]
+
+Teste 23
+
+D = [[ True  True  True ...  True False False]
+ [ True  True  True ... False False False]
+ [False False False ... False False False]
+ ...
+ [ True  True False ...  True  True False]
+ [ True  True  True ...  True False  True]
+ [False False False ... False  True  True]]Y = [False  True  True ...  True  True  True]
+
+Teste 24
+
+D = [[ True  True  True ...  True False  True]
+ [False False  True ... False False False]
+ [ True False False ...  True  True False]
+ ...
+ [ True False False ...  True  True False]
+ [False False False ...  True  True False]
+ [ True  True  True ...  True  True  True]]Y = [False  True  True ...  True False  True]
+
+Teste 25
+
+D = [[ True  True  True ...  True False False]
+ [ True  True  True ... False False False]
+ [False False False ... False False False]
+ ...
+ [False  True  True ...  True  True False]
+ [False False False ... False  True False]
+ [ True False  True ...  True False  True]]Y = [False  True False ... False False  True]
+
+Teste 26
+
+D = [[ True  True  True ...  True False False]
+ [ True  True  True ... False False False]
+ [False False False ... False False False]
+ ...
+ [False  True  True ...  True  True False]
+ [False False False ... False  True False]
+ [ True False  True ...  True False  True]]Y = [False  True False ...  True False False]
+
+Teste 27
+
+D = [[ True  True  True ... False  True False]
+ [False  True  True ... False  True False]
+ [False False False ... False  True False]
+ ...
+ [False  True  True ... False  True  True]
+ [ True False False ...  True False False]
+ [ True False  True ... False  True False]]Y = [False  True False ...  True False  True]
+

@@ -17,10 +17,11 @@ def createdecisiontree(D, Y, noise = False):
 	num_attributes = len(D[0])
 
 	f = open('log.txt', 'a')
-	f.write(f'Teste {c}\n')
+	f.write(f'Teste {c}\n\n')
 	f.write(f'D = {D}')
-	f.write(f'Y = {Y}\n')
+	f.write(f'Y = {Y}\n\n')
 	f.close()
+	c+= 1
 
 	for i in range(0, len(D)):
 		d = []
@@ -43,7 +44,10 @@ def decisiontreelearning(examples, attributes, parent_examples):
 	if examples == []:
 		return plurality_value(parent_examples)
 	elif same_classification(examples) and parent_examples != examples:
-		return int(examples[0][1])
+		if isinstance(examples[0][1], bool):
+			return examples[0][1]
+		else:
+			return int(examples[0][1])
 	elif attributes == []:
 		return plurality_value(examples)
 	else:
@@ -157,5 +161,9 @@ def remainder(attributes, examples, pn):
 	return sum(a)
 
 
-#D = np.array([np.array([0,0,0]), np.array([0,0,1]), np.array([0,1,0]), np.array([1,0,0]), np.array([0, 1, 1]), np.array([1,1,0]), np.array([1,0,1]), np.array([1,1,1])])
-#T = createdecisiontree(D, np.array([0,0,0,0,0,0,0,1]))
+
+
+
+D = np.array([np.array([False, False]), np.array([False,True]), np.array([True, False]), np.array([True, True])])
+T = createdecisiontree(D, np.array([False,False,False,True]))
+print(T)
