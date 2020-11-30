@@ -25,6 +25,11 @@ def dataset(datasetnumb):
     if datasetnumb<16:
         D = D2
         Y = (np.array([datasetnumb//8,datasetnumb//4,datasetnumb//2,datasetnumb//1])>0).astype('int32')
+        #f = open('log.txt', 'w')
+        #f.write(str(D))
+        #f.write(str(Y))
+        #f.write(str(len(D)))
+        #f.close()  
     elif datasetnumb==16:
         D = D3
         Y = np.array([0,1,0,1,0,1,0,1])
@@ -65,7 +70,6 @@ def datasetnoise(datasetnumb):
         ii = np.random.randint(0, high=10000, size=1000)
         Y[ii] = Y[ii]^Y[ii]
         
-                
     elif datasetnumb==1:
         np.random.seed(13102020)
         D = np.random.rand(10000,12)>0.5

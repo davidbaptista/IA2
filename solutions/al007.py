@@ -8,12 +8,19 @@ Student id #92498
 import numpy as np
 from math import log
 
-[[0,0], [0,1], [1,0], [1,1]], [0,0,0,1]
+c = 0
 
 def createdecisiontree(D, Y, noise = False):
+	global c
 	examples = []
 	attributes = []
 	num_attributes = len(D[0])
+
+	f = open('log.txt', 'a')
+	f.write(f'Teste {c}\n')
+	f.write(f'D = {D}')
+	f.write(f'Y = {Y}\n')
+	f.close()
 
 	for i in range(0, len(D)):
 		d = []
@@ -28,17 +35,15 @@ def createdecisiontree(D, Y, noise = False):
 			a.append(D[i][j])
 		
 		attributes.append(a)
-	
-#	print(examples)
-#	print(attributes)
+
 	return decisiontreelearning(examples, attributes, examples)
 
 
 def decisiontreelearning(examples, attributes, parent_examples):
 	if examples == []:
 		return plurality_value(parent_examples)
-	elif same_classification(examples):
-		return examples[0][1]
+	elif same_classification(examples) and parent_examples != examples:
+		return int(examples[0][1])
 	elif attributes == []:
 		return plurality_value(examples)
 	else:
@@ -59,11 +64,11 @@ def decisiontreelearning(examples, attributes, parent_examples):
 				attrs.append([])
 
 			for e in examples:
-				if e[0][i] == vk:
+				if int(e[0][i]) == int(vk):
 					exs.append(e)
 
 					for j in range(0, len(e[0])):
-						attrs[j].append(e[0][j])
+						attrs[j].append(int(e[0][j]))
 
 			subtree = decisiontreelearning(exs, attrs, examples)
 			tree.append(subtree)
@@ -71,9 +76,9 @@ def decisiontreelearning(examples, attributes, parent_examples):
 		return tree
 
 def same_classification(examples):
-	value = examples[0][1]
+	value = int(examples[0][1])
 	for i in range(1, len(examples)):
-		if value != examples[i][1]:
+		if value != int(examples[i][1]):
 			return False
 	
 	return True
@@ -83,7 +88,7 @@ def plurality_value(examples):
 	n_ones = 0
 
 	for i in range(0, len(examples)):
-		if examples[i][1] == 0:
+		if int(examples[i][1]) == 0:
 			n_zero += 1
 		else:
 			n_ones += 1
@@ -104,7 +109,7 @@ def importance(attributes, examples):
 	n = 0
 
 	for i in range(0, len(examples)):
-		if examples[i][1] == 0:
+		if int(examples[i][1]) == 0:
 			n += 1
 		else:
 			p += 1
@@ -139,11 +144,9 @@ def remainder(attributes, examples, pn):
 	for u in uniques:
 		nk = 0
 		pk = 0
-	#	print(f'len atributos: {len(attributes)} e len exemplos: {len(examples)}')
-	#	print(attributes)
 		for i in range(0, len(attributes)):
-			if attributes[i] == u:
-				if examples[i][1] == 0:
+			if int(attributes[i]) == u:
+				if int(examples[i][1]) == 0:
 					nk += 1
 				else:
 					pk += 1
@@ -153,20 +156,6 @@ def remainder(attributes, examples, pn):
 
 	return sum(a)
 
-def classify(T, data):
-	pass
 
-
-'''print(remainder([True, False, True, True, False, False, True, False], 
-	([(True, True), 0], 
-	[(False, False), 1],
-	[(True, True), 0], 
-	[(True, False), 0], 
-	[(False, True), 0], 
-	[(False, False), 1], 
-	[(True, False), 0], 
-	[(False, False), 0]), 8))
-'''
-
-'''print(importance([[0,0,1,1], [0,1,0,1]], 
-				[[(0,0),0], [(0,1),0], [(1,0),0], [(1,1),1]]))'''
+#D = np.array([np.array([0,0,0]), np.array([0,0,1]), np.array([0,1,0]), np.array([1,0,0]), np.array([0, 1, 1]), np.array([1,1,0]), np.array([1,0,1]), np.array([1,1,1])])
+#T = createdecisiontree(D, np.array([0,0,0,0,0,0,0,1]))
