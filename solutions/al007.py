@@ -44,10 +44,7 @@ def decisiontreelearning(examples, attributes, parent_examples):
 	if examples == []:
 		return plurality_value(parent_examples)
 	elif same_classification(examples) and parent_examples != examples:
-		if isinstance(examples[0][1], bool):
-			return examples[0][1]
-		else:
-			return int(examples[0][1])
+		return int(examples[0][1])
 	elif attributes == []:
 		return plurality_value(examples)
 	else:
@@ -164,6 +161,5 @@ def remainder(attributes, examples, pn):
 
 
 
-D = np.array([np.array([False, False]), np.array([False,True]), np.array([True, False]), np.array([True, True])])
-T = createdecisiontree(D, np.array([False,False,False,True]))
-print(T)
+#D = np.array([np.array([False, False]), np.array([False,True]), np.array([True, False]), np.array([True, True])])
+#T = createdecisiontree(D, np.array([False,False,False,True]))
