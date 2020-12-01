@@ -8,7 +8,7 @@ Student id #92498
 import numpy as np
 from math import log
 import copy
-#c = 0
+c = 0
 
 def createdecisiontree(D, Y, noise = False):
 	examples = []
@@ -31,9 +31,9 @@ def createdecisiontree(D, Y, noise = False):
 		examples.append([d,Y[i]])
 
 	for j in range(0, num_attributes):
-		a = []
+		a = [j, []]
 		for i in range(0, len(D)):
-			a.append(D[i][j])
+			a[1].append(D[i][j])
 		
 		attributes.append(a)
 
@@ -41,40 +41,58 @@ def createdecisiontree(D, Y, noise = False):
 
 
 def decisiontreelearning(examples, attributes, parent_examples):
+	global c
+	c+= 1
+
 	if examples == []:
 		return plurality_value(parent_examples)
 	elif same_classification(examples) and parent_examples != examples:
 		return int(examples[0][1])
-	elif attributes == []:
+	elif attributes_empty(attributes):
 		return plurality_value(examples)
 	else:
 		importances = importance(attributes, examples)
-		max_importance = max(importances)
+		max_importance = importances[0][1]
+
+		for imp in importances:
+			if imp[1] > max_importance:
+				max_importance = imp[1]
+
 		for i in range(0, len(importances)):
-			if importances[i] == max_importance:
-				tree = [i,] 
+			if importances[i][1] == max_importance:
+				tree = [importances[i][0],] 
+
 				break # TODO: heuristica
 		
-		i = tree[0]
-		unique_attribute_values = np.unique(np.array(attributes[i]))
+		unique_attribute_values = np.unique(np.array(attributes[i][1]))
 		for vk in unique_attribute_values:
 			exs = []
 			attrs = []
 
-			for j in range(0, len(examples[0][0])):
-				attrs.append([])
+			for j in range(0, len(attributes)):
+				attrs.append([attributes[j][0], []])
 
 			for e in examples:
 				if int(e[0][i]) == int(vk):
-					exs.append(e)
-
 					for j in range(0, len(e[0])):
-						attrs[j].append(int(e[0][j]))
+						attrs[j][1].append(int(e[0][j]))
 
+					en = copy.deepcopy(e)
+					en[0].pop(i)
+					exs.append(en)
+
+					
+			attrs.pop(i)
 			subtree = decisiontreelearning(exs, attrs, examples)
 			tree.append(subtree)
 
 		return tree
+
+def attributes_empty(attributes):
+	for attr in attributes:
+		if attr[1] == []:
+			return True
+	return False
 
 def same_classification(examples):
 	value = int(examples[0][1])
@@ -118,7 +136,7 @@ def importance(attributes, examples):
 	B = entropy(p/(p+n))
 	
 	for attr in attributes:
-		result.append(B - remainder(attr, examples, p+n))	
+		result.append([attr[0], B - remainder(attr[1], examples, p+n)])	
 	return result
 
 ''' B(p)
@@ -158,9 +176,8 @@ def remainder(attributes, examples, pn):
 	return sum(a)
 
 
-#D = [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
-#Y = [0, 1, 1, 0, 0, 1, 1, 0]
-#D = [[0, 0], [0, 1], [1, 0], [1, 1]]
-#Y = [1, 1, 1, 0]
+D = [[0, 0, 0,], [0, 0, 1,], [0, 1, 0,],  [0, 1, 1,], [1, 0, 0,], [1, 0, 1,], [1, 1, 0,], [1, 1, 1,]]
+Y = [0, 1, 0, 1, 0, 1, 0, 1,]
 
-#print(createdecisiontree(D, Y))
+
+print(createdecisiontree(D, Y))
