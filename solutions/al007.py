@@ -15,14 +15,6 @@ def createdecisiontree(D, Y, noise = False):
 	attributes = []
 	num_attributes = len(D[0])
 
-#	global c
-#	f = open('tests/log.txt', 'a')
-#	f.write(f'Teste {c}\n\n')
-#	f.write(f'D = {D}')
-#	f.write(f'Y = {Y}\n\n')
-#	f.close()
-#	c+= 1
-
 	for i in range(0, len(D)):
 		d = []
 		for j in range(0, num_attributes):
@@ -37,7 +29,18 @@ def createdecisiontree(D, Y, noise = False):
 		
 		attributes.append(a)
 
-	return decisiontreelearning(examples, attributes, examples)
+	tree = decisiontreelearning(examples, attributes, examples)
+
+	tree_pruning(tree)
+
+	return tree
+
+
+t = [0,[1,[2,0,1],[2,1,0]],[1,[2,0,1],[2,1,0]]]
+t_p = [1,[2,0,1],[2,1,0]]
+
+def tree_pruning(tree):
+	pass
 
 
 def decisiontreelearning(examples, attributes, parent_examples):
@@ -77,12 +80,14 @@ def decisiontreelearning(examples, attributes, parent_examples):
 					for j in range(0, len(e[0])):
 						attrs[j][1].append(int(e[0][j]))
 
+					# remover a coluna analisada
 					en = copy.deepcopy(e)
 					en[0].pop(i)
 					exs.append(en)
 
-					
+			# remover atributo ja analisado
 			attrs.pop(i)
+
 			subtree = decisiontreelearning(exs, attrs, examples)
 			tree.append(subtree)
 
@@ -174,10 +179,3 @@ def remainder(attributes, examples, pn):
 
 
 	return sum(a)
-
-
-D = [[0, 0, 0,], [0, 0, 1,], [0, 1, 0,],  [0, 1, 1,], [1, 0, 0,], [1, 0, 1,], [1, 1, 0,], [1, 1, 1,]]
-Y = [0, 1, 0, 1, 0, 1, 0, 1,]
-
-
-print(createdecisiontree(D, Y))
