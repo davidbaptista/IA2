@@ -7,21 +7,21 @@ Student id #92498
 
 import numpy as np
 from math import log
-
-c = 0
+import copy
+#c = 0
 
 def createdecisiontree(D, Y, noise = False):
-	global c
 	examples = []
 	attributes = []
 	num_attributes = len(D[0])
 
-	f = open('log.txt', 'a')
-	f.write(f'Teste {c}\n\n')
-	f.write(f'D = {D}')
-	f.write(f'Y = {Y}\n\n')
-	f.close()
-	c+= 1
+#	global c
+#	f = open('tests/log.txt', 'a')
+#	f.write(f'Teste {c}\n\n')
+#	f.write(f'D = {D}')
+#	f.write(f'Y = {Y}\n\n')
+#	f.close()
+#	c+= 1
 
 	for i in range(0, len(D)):
 		d = []
@@ -158,8 +158,9 @@ def remainder(attributes, examples, pn):
 	return sum(a)
 
 
+#D = [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
+#Y = [0, 1, 1, 0, 0, 1, 1, 0]
+#D = [[0, 0], [0, 1], [1, 0], [1, 1]]
+#Y = [1, 1, 1, 0]
 
-
-
-#D = np.array([np.array([False, False]), np.array([False,True]), np.array([True, False]), np.array([True, True])])
-#T = createdecisiontree(D, np.array([False,False,False,True]))
+#print(createdecisiontree(D, Y))
