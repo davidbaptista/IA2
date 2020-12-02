@@ -7,6 +7,7 @@ Student id #92498
 
 import numpy as np
 from math import log
+from scipy import stats
 import copy
 c = 0
 
@@ -31,16 +32,58 @@ def createdecisiontree(D, Y, noise = False):
 
 	tree = decisiontreelearning(examples, attributes, examples)
 
-	tree_pruning(tree)
+	n = 0
+	p = 0
 
+	for e in Y:
+		if e == 0:
+			n += 1
+		else:
+			p += 1
+
+	#t = tree_pruning(tree)
+	print(tree)
 	return tree
 
+'''pruning del ghetto
 
-t = [0,[1,[2,0,1],[2,1,0]],[1,[2,0,1],[2,1,0]]]
-t_p = [1,[2,0,1],[2,1,0]]
+def tree_pruning(node):
+	print(f'node: {node}')
+	if isinstance(node, list):
+		if node[1] == node[2]:
+			node = node[1]
+		elif isinstance(node[1], list):
+			tree_pruning(node[1])
+		elif isinstance(node[2], list):
+			tree_pruning(node[2])
+	return node'''
 
-def tree_pruning(tree):
-	pass
+'''def tree_pruning(node, p, n):
+	all_leaves = True
+	for i in range(1, len(node)):
+		if isinstance(node[i], list):
+			tree_pruning(node[i], p, n)
+			all_leaves = False
+	
+	if all_leaves:
+		delta = []
+		for i in range(1, len(node)):
+			nk = 0
+			pk = 0
+			if int(node[i]) == 0:
+				nk += 1
+			else:
+				pk += 1
+		
+			dp = p * ((pk + nk) / (p + n))
+			dn = n * ((pk + nk) / (p + n))
+			print(f'pk {pk} nk {nk}')
+			delta.append((((pk - dp)**2) / dp) + (((nk - dn)**2) / dn))
+		
+		deviation = sum(delta)
+		v = stats.chi2.ppf(deviation, p+n-1)
+		print(f'deviation:{deviation} v:{v} d:{p+n-1}')'''
+			
 
 
 def decisiontreelearning(examples, attributes, parent_examples):
@@ -56,42 +99,53 @@ def decisiontreelearning(examples, attributes, parent_examples):
 	else:
 		importances = importance(attributes, examples)
 		max_importance = importances[0][1]
+		
 
 		for imp in importances:
 			if imp[1] > max_importance:
 				max_importance = imp[1]
-
+		
+		subtrees = []
+		
 		for i in range(0, len(importances)):
 			if importances[i][1] == max_importance:
-				tree = [importances[i][0],] 
+				tree = [importances[i][0],]
+				subtrees.append(create_subtree(examples, attributes, tree, i))
 
-				break # TODO: heuristica
-		
-		unique_attribute_values = np.unique(np.array(attributes[i][1]))
-		for vk in unique_attribute_values:
-			exs = []
-			attrs = []
+		min_subtree = subtrees[0]
+		for sub in subtrees[1:]:
+			if len(str(sub)) < len(str(min_subtree)):
+				min_subtree = sub
+				
+		return min_subtree
 
-			for j in range(0, len(attributes)):
-				attrs.append([attributes[j][0], []])
 
-			for e in examples:
-				if int(e[0][i]) == int(vk):
-					for j in range(0, len(e[0])):
-						attrs[j][1].append(int(e[0][j]))
+def create_subtree(examples, attributes, tree, i):
+	unique_attribute_values = np.unique(np.array(attributes[i][1]))
+	for vk in unique_attribute_values:
+		exs = []
+		attrs = []
 
-					# remover a coluna analisada
-					en = copy.deepcopy(e)
-					en[0].pop(i)
-					exs.append(en)
+		for j in range(0, len(attributes)):
+			attrs.append([attributes[j][0], []])
 
-			# remover atributo ja analisado
-			attrs.pop(i)
+		for e in examples:
+			if int(e[0][i]) == int(vk):
+				for j in range(0, len(e[0])):
+					attrs[j][1].append(int(e[0][j]))
 
-			subtree = decisiontreelearning(exs, attrs, examples)
-			tree.append(subtree)
+				# remover a coluna analisada
+				en = copy.deepcopy(e)
+				en[0].pop(i)
+				exs.append(en)
 
-		return tree
+		# remover atributo ja analisado
+		attrs.pop(i)
+
+		subtree = decisiontreelearning(exs, attrs, examples)
+		tree.append(subtree)
+
+	return tree
 
 def attributes_empty(attributes):
 	for attr in attributes:
@@ -179,3 +233,8 @@ def remainder(attributes, examples, pn):
 
 
 	return sum(a)
+
+D = [[1, 0, 0, 0,], [0, 0, 0, 1,], [1, 0, 1, 0,], [0, 0, 1, 1,], [1, 1, 0, 0,],[0, 1, 0, 1,], [1, 1, 1, 0,], [0, 1, 1, 1,]]
+Y = [1, 1, 1, 1, 1, 1, 0, 1,]
+
+print(createdecisiontree(D,Y,False))

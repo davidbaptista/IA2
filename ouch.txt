@@ -1,0 +1,48 @@
+al007.py
+[0, 1, [1, 1, [2, 1, 0]]]
+< 0 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 1 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 2 > #points > 4 #feat > 2
+    errors >  0.0 tree length 17   [32mOK (1)[0m
+< 3 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 4 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 5 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 6 > #points > 4 #feat > 2
+    errors >  0.0 tree length 17   [32mOK (1)[0m
+< 7 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 8 > #points > 4 #feat > 2
+    errors >  0.0 tree length 17   [32mOK (1)[0m
+< 9 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 10 > #points > 4 #feat > 2
+    errors >  0.0 tree length 17   [32mOK (1)[0m
+< 11 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 12 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 13 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 14 > #points > 4 #feat > 2
+    errors >  0.0 tree length 17   [32mOK (1)[0m
+< 15 > #points > 4 #feat > 2
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 16 > #points > 8 #feat > 3
+    errors >  0.0 tree length 9   [32mOK (1)[0m
+< 17 > #points > 8 #feat > 3
+    errors >  0.0 tree length 17   [32mOK (1)[0m
+< 18 > #points > 8 #feat > 3
+    errors >  0.0 tree length 41   [32mOK (1)[0m
+< 19 > #points > 8 #feat > 3
+    errors >  0.0 tree length 25   [32mOK (1)[0m
+< 20 > #points > 8 #feat > 3
+    errors >  0.0 tree length 25   [32mGOOD SMALL TREE (1+bonus)[0m
+< 21 > #points > 1000 #feat > 10
+    errors >  0.0 tree length 49   [32mOK (1)[0m
+< 22 > #points > 5000 #feat > 12
+[31mError loading file, or running!
