@@ -11,6 +11,8 @@ from scipy import stats
 import copy
 c = 0
 
+#chi_sq_table_5 = [3.841, 5.991, 7.815, 9.488, 11.070, 12.592, 14.067, 15.507, 16.919, 18.307, 19.675, 21.026, 22.362, 23.685, 24.996, 26.296, 27.587, 28.869, 30.144, 31.410, 32.671, 33.924, 35.172, 36.415, 37.652, 38.885, 40.113, 41.337, 42.557, 43.773, 44.985, 46.194, 47.400, 48.602, 49.802, 50.998, 52.192, 53.384, 54.572, 55.758, 56.942, 58.124, 59.304, 60.481, 61.656, 62.830, 64.001, 65.171, 66.339, 67.505]
+
 def createdecisiontree(D, Y, noise = False):
 	examples = []
 	attributes = []
@@ -41,8 +43,8 @@ def createdecisiontree(D, Y, noise = False):
 		else:
 			p += 1
 
-	#t = tree_pruning(tree)
-	print(tree)
+	'''t = tree_pruning(tree, p, n)'''
+	#print(f't={t}')
 	return tree
 
 '''pruning del ghetto
@@ -57,17 +59,19 @@ def tree_pruning(node):
 		elif isinstance(node[2], list):
 			tree_pruning(node[2])
 	return node'''
-
-'''def tree_pruning(node, p, n):
+'''
+def tree_pruning(node, p, n):
+	#print(f'node={node}')
 	all_leaves = True
 	for i in range(1, len(node)):
 		if isinstance(node[i], list):
-			tree_pruning(node[i], p, n)
+			node = tree_pruning(node[i], p, n)
 			all_leaves = False
 	
 	if all_leaves:
 		delta = []
 		for i in range(1, len(node)):
+			#print(f'iteracao {i}')
 			nk = 0
 			pk = 0
 			if int(node[i]) == 0:
@@ -75,14 +79,25 @@ def tree_pruning(node):
 			else:
 				pk += 1
 		
+			#print(f'p{p} n{n} pk{pk} nk{nk}')
 			dp = p * ((pk + nk) / (p + n))
 			dn = n * ((pk + nk) / (p + n))
-			print(f'pk {pk} nk {nk}')
+			if dp == 0 or dn == 0:
+				#print('return')
+				continue
+			#print(f'dp {dp} dn {dn}')
 			delta.append((((pk - dp)**2) / dp) + (((nk - dn)**2) / dn))
 		
 		deviation = sum(delta)
-		v = stats.chi2.ppf(deviation, p+n-1)
-		print(f'deviation:{deviation} v:{v} d:{p+n-1}')'''
+		#print(f'deviation:{deviation} d:{p+n-1}')
+		chi_sq = chi_sq_table_5[p+n]
+		if deviation > chi_sq:
+			print(f'deviation = {deviation} chi_sq = {chi_sq}')
+			node = node[1] #TODO: heuristica
+	return node'''
+
+
+
 			
 
 
@@ -237,4 +252,4 @@ def remainder(attributes, examples, pn):
 D = [[1, 0, 0, 0,], [0, 0, 0, 1,], [1, 0, 1, 0,], [0, 0, 1, 1,], [1, 1, 0, 0,],[0, 1, 0, 1,], [1, 1, 1, 0,], [0, 1, 1, 1,]]
 Y = [1, 1, 1, 1, 1, 1, 0, 1,]
 
-print(createdecisiontree(D,Y,False))
+createdecisiontree(D,Y,False)
