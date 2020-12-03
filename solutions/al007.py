@@ -87,7 +87,7 @@ def decisiontreelearning(examples, attributes, parent_examples):
 
 def create_subtree(examples, attributes, tree, i):
 	unique_attribute_values = np.unique(np.array(attributes[i][1]))
-	for vk in unique_attribute_values:
+	for vk in (False, True):
 		exs = []
 		attrs = []
 
@@ -109,6 +109,7 @@ def create_subtree(examples, attributes, tree, i):
 
 		subtree = decisiontreelearning(exs, attrs, examples)
 		tree.append(subtree)
+		
 
 	return tree
 
@@ -124,7 +125,7 @@ def examples_empty(examples):
 	if examples == []:
 		return True
 	for ex in examples:
-		if ex[0] == []:
+		if ex[1] == []:
 			return True
 	return False
 
@@ -214,4 +215,4 @@ def remainder(attributes, examples, pn):
 '''D = np.array([[ True,  True,  True, ..., False,  True, False,], [False,  True,  True, ..., False,  True, False,], [False, False, False, ..., False,  True, False,], ..., [False,  True,  True, ..., False,  True,  True,], [ True, False, False, ...,  True, False, False,], [ True, False,  True, ..., False,  True, False,]])
 Y = np.array([False,  True, False, ...,  True, False,  True,])
 
-print(createdecisiontree(D, Y))'''
+ecisiontree(D, Y))'''
