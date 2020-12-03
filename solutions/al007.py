@@ -15,23 +15,25 @@ def createdecisiontree(D, Y, noise = False):
 	examples = []
 	attributes = []
 	num_attributes = len(D[0])
+	D = D.tolist()
+	Y = Y.tolist()
 
 	for i in range(0, len(D)):
-		d = []
-		for j in range(0, num_attributes):
-			d.append(D[i][j])
+		examples.append([D[i], Y[i]])
 
-		examples.append([d,Y[i]])
+	i = 0
+	for value in D[0]:
+		attributes.append([i, []])
+		i += 1
 
-	for j in range(0, num_attributes):
-		a = [j, []]
-		for i in range(0, len(D)):
-			a[1].append(D[i][j])
+	for i in range(0, len(D)):
+		j = 0
 		
-		attributes.append(a)
+		for value in D[i]:
+			attributes[j][1].append(value)
+			j += 1
 
 	tree = decisiontreelearning(examples, attributes, examples)
-
 	n = 0
 	p = 0
 
@@ -47,7 +49,7 @@ def decisiontreelearning(examples, attributes, parent_examples):
 	global c
 	c+= 1
 
-	if examples == []:
+	if examples_empty(examples):
 		return plurality_value(parent_examples)
 	elif same_classification(examples) and parent_examples != examples:
 		return int(examples[0][1])
@@ -61,7 +63,10 @@ def decisiontreelearning(examples, attributes, parent_examples):
 				tree = [i,]
 				subtrees.append(create_subtree(examples, attributes, tree, i))
 		else:
+			
 			importances = importance(attributes, examples)
+		#	print(f'examples = {examples}')
+		#	print(f'importances = {importances}')
 			max_importance = importances[0][1]
 			for imp in importances:
 				if imp[1] > max_importance:
@@ -108,8 +113,18 @@ def create_subtree(examples, attributes, tree, i):
 	return tree
 
 def attributes_empty(attributes):
+	if attributes == []:
+		return True
 	for attr in attributes:
 		if attr[1] == []:
+			return True
+	return False
+
+def examples_empty(examples):
+	if examples == []:
+		return True
+	for ex in examples:
+		if ex[0] == []:
 			return True
 	return False
 
@@ -145,6 +160,7 @@ def importance(attributes, examples):
 	result = []
 	p = 0
 	n = 0
+	##print(f'examples_imp= {examples}, att_imp = {attributes}')
 
 	for i in range(0, len(examples)):
 		if int(examples[i][1]) == 0:
@@ -193,8 +209,9 @@ def remainder(attributes, examples, pn):
 
 
 	return sum(a)
+ 
 
-D = [[1, 0, 0, 0,], [0, 0, 0, 1,], [1, 0, 1, 0,], [0, 0, 1, 1,], [1, 1, 0, 0,],[0, 1, 0, 1,], [1, 1, 1, 0,], [0, 1, 1, 1,]]
-Y = [1, 1, 1, 1, 1, 1, 0, 1,]
+'''D = np.array([[ True,  True,  True, ..., False,  True, False,], [False,  True,  True, ..., False,  True, False,], [False, False, False, ..., False,  True, False,], ..., [False,  True,  True, ..., False,  True,  True,], [ True, False, False, ...,  True, False, False,], [ True, False,  True, ..., False,  True, False,]])
+Y = np.array([False,  True, False, ...,  True, False,  True,])
 
-createdecisiontree(D,Y,False)
+print(createdecisiontree(D, Y))'''
