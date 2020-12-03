@@ -112,20 +112,23 @@ def decisiontreelearning(examples, attributes, parent_examples):
 	elif attributes_empty(attributes):
 		return plurality_value(examples)
 	else:
-		importances = importance(attributes, examples)
-		max_importance = importances[0][1]
-		
-
-		for imp in importances:
-			if imp[1] > max_importance:
-				max_importance = imp[1]
-		
 		subtrees = []
-		
-		for i in range(0, len(importances)):
-			if importances[i][1] == max_importance:
-				tree = [importances[i][0],]
+
+		if examples == parent_examples:
+			for i in range(0, len(attributes)):
+				tree = [i,]
 				subtrees.append(create_subtree(examples, attributes, tree, i))
+		else:
+			importances = importance(attributes, examples)
+			max_importance = importances[0][1]
+			for imp in importances:
+				if imp[1] > max_importance:
+					max_importance = imp[1]
+			
+			for i in range(0, len(importances)):
+				if importances[i][1] == max_importance:
+					tree = [importances[i][0],]
+					subtrees.append(create_subtree(examples, attributes, tree, i))
 
 		min_subtree = subtrees[0]
 		for sub in subtrees[1:]:
@@ -188,7 +191,7 @@ def plurality_value(examples):
 
 	# TODO: heuristica
 	if n_zero == n_ones:
-		return 0
+		return 1
 
 	return 0 if n_zero > n_ones else 1
 
