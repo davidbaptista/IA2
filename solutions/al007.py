@@ -5,35 +5,31 @@ Student id #92446
 Student id #92498
 """
 
+import copy
 import numpy as np
 from math import log
-from scipy import stats
-import copy
-c = 0
 
 def createdecisiontree(D, Y, noise = False):
 	examples = []
 	attributes = []
 	num_attributes = len(D[0])
-	D = D.tolist()
-	Y = Y.tolist()
 
 	for i in range(0, len(D)):
-		examples.append([D[i], Y[i]])
+		d = []
+		for j in range(0, num_attributes):
+			d.append(D[i][j])
 
-	i = 0
-	for value in D[0]:
-		attributes.append([i, []])
-		i += 1
+		examples.append([d,Y[i]])
 
-	for i in range(0, len(D)):
-		j = 0
+	for j in range(0, num_attributes):
+		a = [j, []]
+		for i in range(0, len(D)):
+			a[1].append(D[i][j])
 		
-		for value in D[i]:
-			attributes[j][1].append(value)
-			j += 1
+		attributes.append(a)
 
 	tree = decisiontreelearning(examples, attributes, examples)
+
 	n = 0
 	p = 0
 
@@ -42,31 +38,34 @@ def createdecisiontree(D, Y, noise = False):
 			n += 1
 		else:
 			p += 1
+	
+#	print(f'before pruning = {tree}')
+			
+	if noise:
+		tree_pruning(tree, tree, examples)
+
+#	print(f'after pruning = {tree}')
 
 	return tree
 
 def decisiontreelearning(examples, attributes, parent_examples):
-	global c
-	c+= 1
-
 	if examples_empty(examples):
 		return plurality_value(parent_examples)
 	elif same_classification(examples) and parent_examples != examples:
 		return int(examples[0][1])
 	elif attributes_empty(attributes):
-		return plurality_value(examples)
+		return plurality_value(examples, parent_examples)
 	else:
 		subtrees = []
 
-		if examples == parent_examples:
+		if  examples == parent_examples:
 			for i in range(0, len(attributes)):
 				tree = [i,]
 				subtrees.append(create_subtree(examples, attributes, tree, i))
 		else:
 			
 			importances = importance(attributes, examples)
-		#	print(f'examples = {examples}')
-		#	print(f'importances = {importances}')
+	
 			max_importance = importances[0][1]
 			for imp in importances:
 				if imp[1] > max_importance:
@@ -76,7 +75,7 @@ def decisiontreelearning(examples, attributes, parent_examples):
 				if importances[i][1] == max_importance:
 					tree = [importances[i][0],]
 					subtrees.append(create_subtree(examples, attributes, tree, i))
-
+	
 		min_subtree = subtrees[0]
 		for sub in subtrees[1:]:
 			if len(str(sub)) < len(str(min_subtree)):
@@ -86,7 +85,6 @@ def decisiontreelearning(examples, attributes, parent_examples):
 
 
 def create_subtree(examples, attributes, tree, i):
-	unique_attribute_values = np.unique(np.array(attributes[i][1]))
 	for vk in (False, True):
 		exs = []
 		attrs = []
@@ -109,9 +107,69 @@ def create_subtree(examples, attributes, tree, i):
 
 		subtree = decisiontreelearning(exs, attrs, examples)
 		tree.append(subtree)
-		
 
 	return tree
+
+def classify(tree, examples):
+	classifications = []
+	
+	for example in examples:
+		wT = tree
+
+		for i in range(len(example[0])):
+			if example[0][wT[0]] == 0:
+				if not isinstance(wT[1], list):
+					classifications.append(wT[1])
+					break
+				else:
+					wT = wT[1]
+			else:
+				if not isinstance(wT[2], list):
+					classifications.append(wT[2])
+					break
+				else:
+					wT = wT[2]
+	
+	i = 0
+	for example in examples:
+		if example[1] != classifications[i]:
+			return False
+		i+=1
+
+	return True
+
+def tree_pruning(tree, node, examples):
+	if isinstance(node[1], list):
+		if not isinstance(node[1][1], list) and not isinstance(node[1][2], list):
+			aux = node[1]
+			node[1] = 0
+
+			if classify(tree, examples):
+				return
+			node[1] = 1
+
+			if classify(tree, examples):
+				return
+
+			node[1] = aux
+		else:
+			tree_pruning(tree, node[1], examples)
+
+	if isinstance(node[2], list):
+		if not isinstance(node[2][1], list) and not isinstance(node[2][2], list):
+			aux = node[2]
+			node[2] = 0
+			
+			if classify(tree, examples):
+				return
+			node[2] = 1
+
+			if classify(tree, examples):
+
+				return
+			node[2] = aux
+		else:
+			tree_pruning(tree, node[2], examples)
 
 def attributes_empty(attributes):
 	if attributes == []:
@@ -137,7 +195,7 @@ def same_classification(examples):
 	
 	return True
 
-def plurality_value(examples):
+def plurality_value(examples, parent_examples=None):
 	n_zero = 0
 	n_ones = 0
 
@@ -147,9 +205,19 @@ def plurality_value(examples):
 		else:
 			n_ones += 1
 
-	# TODO: heuristica
 	if n_zero == n_ones:
-		return 1
+		n_zero = 0
+		n_ones = 0
+		
+		if parent_examples:
+			for i in range(0, len(parent_examples)):
+				if int(parent_examples[i][1]) == 0:
+					n_zero += 1
+				else:
+					n_ones += 1
+
+	if n_zero == n_ones:
+		return 0
 
 	return 0 if n_zero > n_ones else 1
 
@@ -210,9 +278,3 @@ def remainder(attributes, examples, pn):
 
 
 	return sum(a)
- 
-
-'''D = np.array([[ True,  True,  True, ..., False,  True, False,], [False,  True,  True, ..., False,  True, False,], [False, False, False, ..., False,  True, False,], ..., [False,  True,  True, ..., False,  True,  True,], [ True, False, False, ...,  True, False, False,], [ True, False,  True, ..., False,  True, False,]])
-Y = np.array([False,  True, False, ...,  True, False,  True,])
-
-ecisiontree(D, Y))'''

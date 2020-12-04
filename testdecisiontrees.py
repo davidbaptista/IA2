@@ -30,7 +30,6 @@ P  = '\033[35m' # purple
 
 
 def classify(T,data):
-
 	data = np.array(data)
 	out = []
 	for el in data:
@@ -100,7 +99,7 @@ for file in files:
 				res = R+'Erro (0)r'+W
 			print("    errors > ", err, "tree length", l, " ", res  )
 			#print("\nD", D, "\nY", Y)
-			print("tree > ", T)
+			#print("tree > ", T)
 
 		print("points", points, "/26", "short", pointsshort, "/2")
 
@@ -114,10 +113,8 @@ for file in files:
 			D,Y,Dt,Yt,nl,ol = datasetstreelearning.datasetnoise(idataset)
 
 			print("dataset > ", idataset, "#points >", D.shape[0], "#feat >", D.shape[1])
-			print("\nD", D, "\nY", Y)
+			#print("\nD", D, "\nY", Y)
 			Tc = M.createdecisiontree(D,Y,noise=0.1)
-			if idataset == 1:
-				print(Tc)
 			Ytrain = classify(Tc,D)
 			Ytest = classify(Tc,Dt)
 			errtrain = np.mean(np.abs(Ytrain-Yt))
