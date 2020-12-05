@@ -38,15 +38,27 @@ def createdecisiontree(D, Y, noise = False):
 			n += 1
 		else:
 			p += 1
-	
-#	print(f'before pruning = {tree}')
-			
-	if noise:
-		tree_pruning(tree, tree, examples)
 
-#	print(f'after pruning = {tree}')
-
+	tree_index = tree[0]
+	tree = pruning(tree)
+	if not isinstance(tree, list):
+		tree = [tree_index, tree, tree]
+	print(f'tree={tree}')
 	return tree
+
+
+def pruning(node):
+	if isinstance(node, list):
+		node[1] = pruning(node[1])
+		node[2] = pruning(node[2])
+
+		if node[1] == node[2]:
+			return node[1]
+		else:
+			return node
+	else:
+		return node
+
 
 def decisiontreelearning(examples, attributes, parent_examples):
 	if examples_empty(examples):
@@ -143,6 +155,8 @@ def tree_pruning(tree, node, examples):
 		if not isinstance(node[1][1], list) and not isinstance(node[1][2], list):
 			aux = node[1]
 			node[1] = 0
+
+			print(f'tree = {tree}')
 
 			if classify(tree, examples):
 				return
@@ -278,3 +292,6 @@ def remainder(attributes, examples, pn):
 
 
 	return sum(a)
+
+
+#print(pruning([0, [1, [2, 1, 1], [2, 0, 0]], [1, 1, 0]]))
