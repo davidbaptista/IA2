@@ -40,19 +40,56 @@ def createdecisiontree(D, Y, noise = False):
 			p += 1
 
 	if noise:
+		tree = topdown_pruning(tree, tree, examples)
+		print(tree)
+	'''if noise:
 		tree_index = tree[0]
-		print(f'tree before pruning={tree}')
 		tree_aux = tree
-		tree = pruning(tree, tree, examples)
+		tree = shorten(tree)
+
 		if not isinstance(tree, list):
 			tree = [tree_index, tree, tree]
 		if not classify(tree, examples):
 			tree = tree_aux
-		print(f'tree={tree}')
+
+		tree = pruning(tree, tree, examples)
+		print(f'tree after={tree}')'''
 	return tree
 
 
+def topdown_pruning(node, tree, examples):
+	if isinstance(node, list):
+		if isinstance(node[1], list):
+			aux = node[1]
+			node[1] = False
+			if not classify(tree, examples):
+				node[1] = True
+				if not classify(tree, examples):
+					node[1] = aux
+					topdown_pruning(node[1], tree, examples)
+		
+		if isinstance(node[2], list):
+			aux = node[2]
+			node[2] = False
+			if not classify(tree, examples):
+				node[2] = True
+				if not classify(tree, examples):
+					node[2] = aux	
+					topdown_pruning(node[2], tree, examples)
+	return node
 
+
+def shorten(node):
+	if isinstance(node, list):
+		node[1] = shorten(node[1])
+		node[2] = shorten(node[2])
+
+		if node[1] == node[2]:
+			return node[1]
+		else:
+			return node
+	else:
+		return node
 
 def pruning(node, tree, examples):
 	if isinstance(node, list):
@@ -286,3 +323,4 @@ def remainder(attributes, examples, pn):
 
 
 	return sum(a)
+
