@@ -40,91 +40,34 @@ def createdecisiontree(D, Y, noise = False):
 			p += 1
 
 	if noise:
-		tree = topdown_pruning(tree, tree, examples)
-		print(tree)
-	'''if noise:
-		tree_index = tree[0]
-		tree_aux = tree
-		tree = shorten(tree)
+		tree = topdown_pruning(tree, tree, examples, Y)
 
-		if not isinstance(tree, list):
-			tree = [tree_index, tree, tree]
-		if not classify(tree, examples):
-			tree = tree_aux
-
-		tree = pruning(tree, tree, examples)
-		print(f'tree after={tree}')'''
 	return tree
 
 
-def topdown_pruning(node, tree, examples):
+def topdown_pruning(node, tree, examples, Y):
 	if isinstance(node, list):
+		if node[1] == node[2]:
+			return node[1]
+
 		if isinstance(node[1], list):
 			aux = node[1]
-			node[1] = False
-			if not classify(tree, examples):
-				node[1] = True
-				if not classify(tree, examples):
+			node[1] = 0
+			if not classify(tree, examples, Y):
+				node[1] = 1
+				if not classify(tree, examples, Y):
 					node[1] = aux
-					topdown_pruning(node[1], tree, examples)
+					node[1] = topdown_pruning(node[1], tree, examples, Y)
 		
 		if isinstance(node[2], list):
 			aux = node[2]
-			node[2] = False
-			if not classify(tree, examples):
-				node[2] = True
-				if not classify(tree, examples):
+			node[2] = 0
+			if not classify(tree, examples, Y):
+				node[2] = 1
+				if not classify(tree, examples, Y):
 					node[2] = aux	
-					topdown_pruning(node[2], tree, examples)
+					node[2] = topdown_pruning(node[2], tree, examples, Y)
 	return node
-
-
-def shorten(node):
-	if isinstance(node, list):
-		node[1] = shorten(node[1])
-		node[2] = shorten(node[2])
-
-		if node[1] == node[2]:
-			return node[1]
-		else:
-			return node
-	else:
-		return node
-
-def pruning(node, tree, examples):
-	if isinstance(node, list):
-		node1_aux = node[1]
-		node[1] = pruning(node[1], tree, examples)
-		if not isinstance(node[1], list) and not classify(tree, examples):
-			if node[1] == True:
-				node[1] = False
-			elif node[1] == False:
-				node[1] = True
-			if not classify(tree, examples):
-				#print(f'mayaste com tree = {tree}')
-				node[1] = node1_aux
-
-		node2_aux = node[2]
-		node[2] = pruning(node[2], tree, examples)
-
-		if not isinstance(node[2], list) and not classify(tree, examples):
-			if node[2] == True:
-				node[2] = False
-			elif node[2] == False:
-				node[2] = True
-			if not classify(tree, examples):
-			#	print(f'mayaste 2x com tree = {tree}')
-				node[2] = node2_aux
-
-		if node[1] == node[2]:
-			return node[1]
-		elif not isinstance(node[1], list) and not isinstance(node[2], list):
-			return 1
-		else:
-			return node
-	else:
-		return node
-
 
 def decisiontreelearning(examples, attributes, parent_examples):
 	if examples_empty(examples):
@@ -188,7 +131,7 @@ def create_subtree(examples, attributes, tree, i):
 
 	return tree
 
-def classify(tree, examples):
+def classify(tree, examples, Y):
 	classifications = []
 	
 	for example in examples:
@@ -207,13 +150,14 @@ def classify(tree, examples):
 					break
 				else:
 					wT = wT[2]
-	
-	i = 0
-	for example in examples:
-		if example[1] != classifications[i]:
-			return False
-		i+=1
 
+	classifications = np.array(classifications)
+	Y = np.array(Y)
+
+	err = np.mean(np.abs(classifications-Y))
+
+	if err > 0.075:
+		return False
 	return True
 
 def attributes_empty(attributes):
@@ -274,7 +218,6 @@ def importance(attributes, examples):
 	result = []
 	p = 0
 	n = 0
-	##print(f'examples_imp= {examples}, att_imp = {attributes}')
 
 	for i in range(0, len(examples)):
 		if int(examples[i][1]) == 0:
@@ -323,4 +266,3 @@ def remainder(attributes, examples, pn):
 
 
 	return sum(a)
-

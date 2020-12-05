@@ -1,5 +1,4 @@
 al007.py
-[0, 1, [1, 1, [2, 1, 0]]]
 < 0 > #points > 4 #feat > 2
     errors >  0.0 tree length 9   [32mOK (1)[0m
 < 1 > #points > 4 #feat > 2
@@ -45,4 +44,3 @@ al007.py
 < 21 > #points > 1000 #feat > 10
     errors >  0.0 tree length 49   [32mOK (1)[0m
 < 22 > #points > 5000 #feat > 12
-[31mError loading file, or running!
