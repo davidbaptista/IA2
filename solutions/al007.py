@@ -39,21 +39,50 @@ def createdecisiontree(D, Y, noise = False):
 		else:
 			p += 1
 
-	tree_index = tree[0]
-	tree = pruning(tree)
-	if not isinstance(tree, list):
-		tree = [tree_index, tree, tree]
-	print(f'tree={tree}')
+	if noise:
+		tree_index = tree[0]
+		print(f'tree before pruning={tree}')
+		tree_aux = tree
+		tree = pruning(tree, tree, examples)
+		if not isinstance(tree, list):
+			tree = [tree_index, tree, tree]
+		if not classify(tree, examples):
+			tree = tree_aux
+		print(f'tree={tree}')
 	return tree
 
 
-def pruning(node):
+
+
+def pruning(node, tree, examples):
 	if isinstance(node, list):
-		node[1] = pruning(node[1])
-		node[2] = pruning(node[2])
+		node1_aux = node[1]
+		node[1] = pruning(node[1], tree, examples)
+		if not isinstance(node[1], list) and not classify(tree, examples):
+			if node[1] == True:
+				node[1] = False
+			elif node[1] == False:
+				node[1] = True
+			if not classify(tree, examples):
+				#print(f'mayaste com tree = {tree}')
+				node[1] = node1_aux
+
+		node2_aux = node[2]
+		node[2] = pruning(node[2], tree, examples)
+
+		if not isinstance(node[2], list) and not classify(tree, examples):
+			if node[2] == True:
+				node[2] = False
+			elif node[2] == False:
+				node[2] = True
+			if not classify(tree, examples):
+			#	print(f'mayaste 2x com tree = {tree}')
+				node[2] = node2_aux
 
 		if node[1] == node[2]:
 			return node[1]
+		elif not isinstance(node[1], list) and not isinstance(node[2], list):
+			return 1
 		else:
 			return node
 	else:
@@ -149,41 +178,6 @@ def classify(tree, examples):
 		i+=1
 
 	return True
-
-def tree_pruning(tree, node, examples):
-	if isinstance(node[1], list):
-		if not isinstance(node[1][1], list) and not isinstance(node[1][2], list):
-			aux = node[1]
-			node[1] = 0
-
-			print(f'tree = {tree}')
-
-			if classify(tree, examples):
-				return
-			node[1] = 1
-
-			if classify(tree, examples):
-				return
-
-			node[1] = aux
-		else:
-			tree_pruning(tree, node[1], examples)
-
-	if isinstance(node[2], list):
-		if not isinstance(node[2][1], list) and not isinstance(node[2][2], list):
-			aux = node[2]
-			node[2] = 0
-			
-			if classify(tree, examples):
-				return
-			node[2] = 1
-
-			if classify(tree, examples):
-
-				return
-			node[2] = aux
-		else:
-			tree_pruning(tree, node[2], examples)
 
 def attributes_empty(attributes):
 	if attributes == []:
@@ -292,6 +286,3 @@ def remainder(attributes, examples, pn):
 
 
 	return sum(a)
-
-
-#print(pruning([0, [1, [2, 1, 1], [2, 0, 0]], [1, 1, 0]]))
