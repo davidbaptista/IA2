@@ -28,7 +28,7 @@ def createdecisiontree(D, Y, noise = False):
 		
 		attributes.append(a)
 
-	tree = decisiontreelearning(examples, attributes, examples)
+	tree = decisiontreelearning(examples, attributes, examples, noise)
 
 	n = 0
 	p = 0
@@ -43,7 +43,6 @@ def createdecisiontree(D, Y, noise = False):
 		tree = topdown_pruning(tree, tree, examples, Y)
 
 	return tree
-
 
 def topdown_pruning(node, tree, examples, Y):
 	if isinstance(node, list):
@@ -69,7 +68,7 @@ def topdown_pruning(node, tree, examples, Y):
 					node[2] = topdown_pruning(node[2], tree, examples, Y)
 	return node
 
-def decisiontreelearning(examples, attributes, parent_examples):
+def decisiontreelearning(examples, attributes, parent_examples, noise):
 	if examples_empty(examples):
 		return plurality_value(parent_examples)
 	elif same_classification(examples) and parent_examples != examples:
@@ -79,10 +78,17 @@ def decisiontreelearning(examples, attributes, parent_examples):
 	else:
 		subtrees = []
 
-		if  examples == parent_examples:
+		if examples == parent_examples and not noise:
 			for i in range(0, len(attributes)):
 				tree = [i,]
-				subtrees.append(create_subtree(examples, attributes, tree, i))
+				subtrees.append(create_subtree(examples, attributes, tree, i, noise))
+			
+			min_subtree = subtrees[0]
+			for sub in subtrees[1:]:
+				if len(str(sub)) < len(str(min_subtree)):
+					min_subtree = sub
+					
+			return min_subtree
 		else:
 			
 			importances = importance(attributes, examples)
@@ -95,17 +101,13 @@ def decisiontreelearning(examples, attributes, parent_examples):
 			for i in range(0, len(importances)):
 				if importances[i][1] == max_importance:
 					tree = [importances[i][0],]
-					subtrees.append(create_subtree(examples, attributes, tree, i))
+					tree = create_subtree(examples, attributes, tree, i, noise)
+					break
 	
-		min_subtree = subtrees[0]
-		for sub in subtrees[1:]:
-			if len(str(sub)) < len(str(min_subtree)):
-				min_subtree = sub
-				
-		return min_subtree
+			return tree
 
 
-def create_subtree(examples, attributes, tree, i):
+def create_subtree(examples, attributes, tree, i, noise):
 	for vk in (False, True):
 		exs = []
 		attrs = []
@@ -126,7 +128,7 @@ def create_subtree(examples, attributes, tree, i):
 		# remover atributo ja analisado
 		attrs.pop(i)
 
-		subtree = decisiontreelearning(exs, attrs, examples)
+		subtree = decisiontreelearning(exs, attrs, examples, noise)
 		tree.append(subtree)
 
 	return tree
@@ -156,6 +158,7 @@ def classify(tree, examples, Y):
 
 	err = np.mean(np.abs(classifications-Y))
 
+	#return err
 	if err > 0.075:
 		return False
 	return True
