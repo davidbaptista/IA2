@@ -140,7 +140,7 @@ def classify(tree, examples, Y):
 		wT = tree
 
 		for i in range(len(example[0])):
-			if example[0][wT[0]] == 0:
+			if example[0][wT[0]] == False:
 				if not isinstance(wT[1], list):
 					classifications.append(wT[1])
 					break
@@ -158,7 +158,6 @@ def classify(tree, examples, Y):
 
 	err = np.mean(np.abs(classifications-Y))
 
-	#return err
 	if err > 0.075:
 		return False
 	return True
